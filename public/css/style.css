@@ -1,0 +1,478 @@
+@import url("https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap");
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}  
+/* .navbar{
+    display: flex;
+    align-items: center;
+    padding:20px 10px;
+} */
+.logo h1{
+    color: rgb(255, 255, 255);
+    font-family: Fugaz One;
+    font-size:50px; 
+}
+Nav{
+    flex: 1;
+    text-align: right;
+}
+nav ul{
+    display:inline-block;
+    list-style-type: none;   
+}
+nav ul li{
+    display:inline-block;
+    margin-right: 20px; 
+}
+a{
+    text-decoration: none;
+    color:rgb(255, 255, 255);
+    display: block;
+}
+ul li a:hover{
+    color:rgba(255, 255, 255, 0.452);
+}
+p{
+    color: rgb(255, 255, 255);
+}
+/* .container{
+    max-width: 1300px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+} */
+.main{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.lead{
+    padding-top: 5%;
+    flex-basis: 50%;
+    /* min-width: 300px; */
+}
+.lead h1{
+    text-align: center;
+    font-size: 50px;
+    line-height: 40px;
+    margin: 25px 0;
+    /* font-family: Fugaz One; */
+    color: rgb(238, 255, 0);
+}
+.lead p{
+    text-align: center;
+    /* font-family: Fugaz One; */
+    font-size:30px;
+    color: white;
+
+}
+
+/* @media screen and (min-width: 576px) {
+    .lead p{
+        font-size:30px;
+    }
+} */
+
+body{
+    background-image:url(../img/blinking\ stars.gif);
+}
+ul{
+    font-family:"Fugaz One";
+}
+.catagories{
+    margin:70px 0;
+}
+.col-3{
+    flex-basis: 30%;
+    min-width: 250px;
+    margin-bottom: 30px;
+}
+.col-3 img{
+    width: 50%;   
+}
+.small-container{
+    max-width: 1080;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.col-4{
+    /* flex-basis:15%; */
+    flex-basis:25%;
+    padding:10px;
+    min-width: 200;
+    margin-bottom:50px;
+    color: white;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    transition: transform 0.5s;
+}
+.col-4 img{
+   width:70%; 
+}
+.title{
+    text-align:center;
+    margin:0 auto 80px;
+    position: relative;
+    line-height: 150px;
+    color:white;
+    font-family:Fugaz One;
+}
+.title::after{
+    content: "";
+    background:white;
+    width: 100px;
+    height:1px;
+    border-radius: 10px;
+    position:absolute;
+    bottom:0;
+    left:50%;
+    transform: translateX(-50%);
+}
+.col-4:hover{
+    transform:translateY(-3px) ;
+}
+.menu-icon{
+    width: 25px;
+    margin-left: 20px;
+    display:none;
+}
+.col-2{
+    flex-basis: 50%;
+    min-width:300px;
+}
+.col-2 img{
+    max-width: 100%;
+    padding:50px 0;
+}   
+.col-2 h1{
+    font-size: 20px;
+    line-height: 60px;
+    margin:25px 0;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    text-align:left;
+}
+.col-2 h4{
+    text-align: left;
+}
+/*----- media query for menu -----*/
+
+/* @media only screen and (max-width: 800px){
+
+    nav ul{
+        position: absolute;
+        top:120px;
+        left:0;
+        width:100%;
+        overflow:hidden;
+        transition:max-height 0.5s;
+        background: black;
+    }
+    nav ul li{
+        display:block;
+        margin-right:50px;
+        margin-top:10px;
+        margin-bottom:10px; 
+    }
+    nav ul li a{
+        color:white;
+    }
+    .menu-icon{
+        display:block;
+        cursor:pointer;
+    }
+} */
+
+/*----- media query for less than 600 screen size-----*/
+
+@media only screen and (max-width: 600px){
+    .main{
+        text-align: center;
+        }
+    .col-4{
+        flex-basis:100%;
+    }
+    .col-2 h4{
+        text-align: center;
+    }
+    .col-2 h1{
+        text-align: center;
+    }
+    .cart-info p{
+        display: none;
+    }
+}
+h4{
+    font-size: 18px;
+    line-height: 60px;
+    margin:25px 0;
+    color: rgb(255, 255, 255);
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.btn{
+    /* display:inline-block;
+    background:rgba(41, 41, 41, 0.432);
+    padding: 12.5px 30px;
+    margin:30px 0; */
+    border-radius: 4px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    line-height: inherit;
+    padding: 8px 16px;
+    font-size: 1.1rem;
+    -webkit-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+    font-family: 'Fugaz One Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.btn:hover{
+    background:black;
+}
+
+.btn-success {
+    background-color: #2a8853;
+    border-color: #2a8853;
+    color: #ffffff;
+}
+.btn-info {
+    background-color: #007eff;
+    border-color: #007eff;
+    color: #ffffff;
+}
+.btn-warning {
+    background-color: #ea9715;
+    border-color: #ea9715;
+    color: #ffffff;
+}
+.btn-danger {
+    background-color: #fb3d4e;
+    border-color: #fb3d4e;
+    color: #ffffff;
+}
+.btn-dark {
+    color: #fff;
+    background-color: #343a40;
+    border-color: #343a40;
+}
+.single-product{
+    margin-top: 0;
+}
+.single-product .col-2{
+    padding: 20px;
+}
+.single-product h4{
+    margin: 20px;
+    font-size: 22px;
+}
+.single-product select{
+    display: block;
+    padding:10px;
+    margin-top: 20px;
+    border:5px solid rgb(49, 49, 49);
+    font-size: 25px;
+}
+.single-product input{
+    width: 80px;
+    height:40px;
+    padding-left: 10px;
+    font-size: 20px;
+    margin-right: 10px;
+    border:5px solid rgba(255, 255, 255, 0.993);
+}
+/*----- cart items------*/
+
+.cart-page{
+    margin:80px auto;
+    color: white; 
+    font-family: 'Courier New', Courier, monospace;
+}
+table{
+    width:100%;
+    color: #ffffff !important;
+    border-collapse: collapse;
+}
+.cart-info{
+    display:flex;
+    flex-wrap: wrap;
+}
+th{
+    text-align: left;
+    padding: 10px;
+    color: white;
+    background: rgba(49, 48, 48, 0.411);
+    font-weight: normal ;
+}
+td{
+   padding: 10px 5px; 
+}
+td input{
+    width:50px;
+    height:30px;
+    padding:5px;
+}
+td a{
+    color:  rgba(187, 16, 16, 0.514);
+    font-size: 12px ;
+}
+td img{
+    width:80px;
+    height:80px;
+    margin-right:10px;
+}
+.total-price{
+    display:flex;
+    justify-content:flex-end ;
+}
+.total-price table{
+    border-top:10px solid rgba(49, 48, 48, 0.411);
+    width: 100%;
+    max-width: 400px;
+}
+td:last-child{
+    text-align: right;
+}
+th:last-child{
+    text-align: right;
+}
+/*----- account page------*/
+.account-page{
+    padding:50px 0; 
+}
+.form-container{
+    background: rgba(49, 48, 48, 0.411);
+    width:300px;
+    height:400px;
+    position:relative;
+    text-align: center;
+    padding:20px 0;
+    margin:auto;
+    overflow: hidden;
+}
+.form-container span{
+    font-weight: bold;
+    padding: 0 10px;
+    color:white;
+    cursor: pointer;
+    width: 100px;
+    display:inline-block;
+    font-family: 'Fugaz One Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.form-btn{
+    display: inline-block;
+}
+.form-container form{
+    max-width: 300px;
+    padding: 0 20px;
+    position: absolute;
+    top: 130px;
+}
+/* form input{
+    width: 100%;
+    height:30px;
+    margin:10px 0;
+    padding:0 10px;
+    border:5px solid rgb(0, 0, 0);
+}
+form .btn{
+    width:100%;
+    border: none;
+    cursor: pointer;
+    margin:10px 0;
+    color: rgb(255, 255, 255); 
+}
+form .btn:focus{
+    outline: none;
+} */
+#LoginForm{
+    left:-300px;
+}
+#RegForm{
+    left:0;
+}
+form a{
+    font-size: 12px;
+}
+#Indicator{
+    width:100px;
+    border:none;
+    background:rgb(255, 255, 255);
+    height:3px;
+    margin-top: 8px;
+    transform: translateX(100px);
+}
+#LoginForm a{
+    font-family: 'Fugaz One Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.badge {
+    display: inline-block;
+    padding: .25em .4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
+}
+
+.badge-primary {
+    color: #fff;
+    background-color: #007bff;
+}
+
+.badge-secondary {
+    color: #fff;
+    background-color: #6c757d;
+}
+
+.badge-danger {
+    color: #fff;
+    background-color: #dc3545;
+}
+
+.badge-warning {
+    color: #212529;
+    background-color: #ffc107;
+}
+
+.badge-success {
+    color: #fff;
+    background-color: #28a745;
+}
+
+.badge-info {
+    color: #fff;
+    background-color: #17a2b8;
+}
+
+.badge-light {
+    color: #212529;
+    background-color: #f8f9fa;
+}
+
+.badge-dark {
+    color: #fff;
+    background-color: #343a40;
+}
+
+.shop-more {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+}
+
