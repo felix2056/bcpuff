@@ -5,6 +5,13 @@
 
     RewriteEngine On
 
+    # DO NOT REMOVE THIS LINE AND THE LINES BELLOW SSL_REDIRECT:bcpuff.com
+    RewriteEngine on
+    RewriteCond %{HTTPS} off
+    RewriteCond %{HTTP_HOST} (www\.)?bcpuff.com
+    RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    # DO NOT REMOVE THIS LINE AND THE LINES BELLOW SSL_REDIRECT:bcpuff.com
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
