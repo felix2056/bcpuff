@@ -54,7 +54,7 @@
     <script src="https://js.braintreegateway.com/web/dropin/1.24.0/js/dropin.min.js"></script>
 
     <!-- Paypal -->
-    <script src="{{ 'https://www.paypal.com/sdk/js?client-id=' . env('PAYPAL_CLIENT_ID') }}"></script>
+    <script src="{{ 'https://www.paypal.com/sdk/js?client-id=' . env('PAYPAL_CLIENT_ID', 'AdapBgkwSNZva5eSoQpvnW26erJJVamvt9_3J0iIXd3yBz8QSDZAC61Dodq8NQs2cBQd0vrFQlNIcdY5') }}"></script>
 
 </head>
 
