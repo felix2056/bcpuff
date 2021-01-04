@@ -122,8 +122,14 @@
                         </div>
                     </div>
                     <div class="box-footer">
+                        <!-- ORDER FORM -->
+                        <form id="order-form" action="{{ route('payment.place-order') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                        <!-- /ORDER FORM -->
+
                         <a href="{{ route('index') }}" class="btn btn-danger">Cancel Order</a>
-                        <a href="{{ route('checkout') }}" class="btn btn-primary pull-right">Place Order</a>
+                        <a href="{{ route('checkout') }}" class="btn btn-primary pull-right">Checkout</a>
                     </div>
                 </div>
 

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Invoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 use App\Models\Product;
 use App\Models\Order;
@@ -169,7 +171,121 @@ class AdminController extends Controller
 
     public function users()
     {
-        $users = User::get();
+        $users = User::all();
         return view('users.index', compact('users'));
+    }
+
+    public function invoices()
+    {
+        $invoices = Invoice::all();
+
+        $data['total_invoice'] = Invoice::count();
+        $data['paid_invoice'] = Invoice::where('status', 'paid')->count();
+        $data['pending_invoice'] = Invoice::where('status', 'pending')->count();
+        $data['delivered_invoice'] = Invoice::where('status', 'delivered')->count();
+        $data['cancelled_invoice'] = Invoice::where('status', 'cancelled')->count();
+
+        return view('admin.invoices', compact('invoices', 'data'));
+    }
+
+    public function invoiceOrders($id)
+    {
+        $invoice = Invoice::find($id);
+
+        if (!$invoice) {
+            return abort(404);
+        }
+
+        $orders = $invoice->orders()->get();
+        return view('admin.invoiceOrders', compact('invoice', 'orders'));
+    }
+
+    public function updateInvoice(Request $request)
+    {
+        $invoice = Invoice::find($request->invoice_id);
+
+        if (!$invoice) {
+            return response('Invoice Does Not Exist!', 404);
+        }
+
+        $status = $request->invoice_status;
+
+        switch ($status) {
+            case 'pending':
+                $status = 'pending';
+                break;
+
+            case 'paid':
+                $status = 'paid';
+                break;
+
+            case 'delivered':
+                $status = 'delivered';
+                break;
+
+            case 'cancelled':
+                $status = 'cancelled';
+                break;
+            
+            default:
+                $status = 'pending';
+                break;
+        }
+
+        $invoice->status = $status;
+        $invoice->save();
+
+        $this->sendMail($invoice, $status);
+
+        return response('Successfully updated status of invoice BCP-2020-' . $invoice->id . ' to ' . $invoice->status . ', Member: ' . $invoice->user->name . ' will receive a follow up email!');
+    }
+
+    protected function sendMail($invoice, $status)
+    {
+        $user = User::find($invoice->user->id);
+
+        switch ($status) {
+            case 'paid':
+                Mail::send('emails.sendOrderPaid', array(
+                    'name' => $user->name,
+                    'order_id' => $invoice->id,
+                    'order_status' => $status,
+                    'order_due_date' => $invoice->due_date,
+                    'order_total' => $invoice->total
+                ), function($message) use ($user){
+                    $message->from('order-confirmation@bcpuff.com');
+                    $message->to($user->email, $user->name)->subject('Your Order Is Processing!');
+                });
+
+                break;
+
+            case 'delivered':
+                Mail::send('emails.sendOrderDelivered', array(
+                    'name' => $user->name,
+                    'order_id' => $invoice->id,
+                    'order_status' => $status,
+                    'order_due_date' => $invoice->due_date,
+                    'order_total' => $invoice->total
+                ), function($message) use ($user){
+                    $message->from('order-confirmation@bcpuff.com');
+                    $message->to($user->email, $user->name)->subject('Your Order Has Been Delivered! Thank You');
+                });
+    
+                break;
+
+            case 'cancelled':
+                Mail::send('emails.sendOrderCancelled', array(
+                    'name' => $user->name,
+                    'order_id' => $invoice->id,
+                    'order_status' => $status,
+                    'order_due_date' => $invoice->due_date,
+                    'order_total' => $invoice->total
+                ), function($message) use ($user){
+                    $message->from('order-confirmation@bcpuff.com');
+                    $message->to($user->email, $user->name)->subject('Your Order Was Cancelled!');
+                });
+    
+                break;
+        }
     }
 }

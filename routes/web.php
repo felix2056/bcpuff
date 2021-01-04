@@ -47,7 +47,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/orders', 'HomeController@orders')->name('orders');
-    Route::get('/receipts', 'HomeController@receipts')->name('receipts');
 });
 
 Route::group(['middleware' => ['auth', 'is_admin']], function () {
@@ -56,6 +55,10 @@ Route::group(['middleware' => ['auth', 'is_admin']], function () {
         Route::any('/product/add', 'AdminController@productCreate')->name('admin.products.create');
         Route::any('/products/{slug}/edit', 'AdminController@productEdit')->name('admin.products.edit');
         Route::post('/products/{id}/delete', 'AdminController@productDestroy')->name('admin.products.destroy');
+
+        Route::get('/invoices/{id}/orders', 'AdminController@invoiceOrders')->name('admin.invoiceOrders');
+        Route::get('/invoices', 'AdminController@invoices')->name('admin.invoices');
+        Route::post('/update-invoice', 'AdminController@updateInvoice')->name('admin.update_invoice');
 
         //Users
         Route::get('/users', 'AdminController@users')->name('admin.users.index');
@@ -66,6 +69,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/checkout', 'PaymentController@checkout')->name('checkout');
 
     Route::group(['prefix' => 'payment'], function () {
+        Route::post('/place-order', 'PaymentController@placeOrder')->name('payment.place-order');
+
         //Braintree
         Route::post('/braintree', 'PaymentController@braintree')->name('payment.braintree');
 

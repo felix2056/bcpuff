@@ -28,11 +28,6 @@ class HomeController extends Controller
         return view('products.orders', compact('orders'));
     }
 
-    public function receipts()
-    {
-        return view('receipts');
-    }
-
     public function sendMail(Request $request)
     {
         $user = User::find(Auth::user()->id);

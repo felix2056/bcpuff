@@ -106,6 +106,7 @@
                             <a class="dropdown-item" href="{{ route('orders') }}">ORDERS</a>
                             @if(Auth::user()->isAdmin())
                             <a class="dropdown-item" href="{{ route('admin.index') }}">ADMIN</a>
+                            <a class="dropdown-item" href="{{ route('admin.invoices') }}">INVOICES</a>
                             <a class="dropdown-item" href="{{ route('admin.products.create') }}">ADD PRODUCT</a>
 
                             <div class="dropdown-divider"></div>

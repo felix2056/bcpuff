@@ -6,12 +6,13 @@ Home
 
 @section('content')
 <div class="container-full">
-    <div class="lead">
-        <b>
+    <div>
+        <img src="/images/face.png" alt="bcpuff">
+        {{-- <b>
             <h1>WARNING</h1>
-        </b>
+        </b> --}}
     
-        <div class="container">
+        {{-- <div class="container">
             <div class="row">
                 <div class="col-md-6 offset-md-3 col-12">
                     <div class="container">
@@ -23,7 +24,7 @@ Home
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 @endsection

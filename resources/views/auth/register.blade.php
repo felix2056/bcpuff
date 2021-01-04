@@ -78,7 +78,7 @@ Register
                                 <div class="col-12">
                                   <div class="checkbox">
                                     <input type="checkbox" required id="basic_checkbox_1">
-                                    <label for="basic_checkbox_1">I confirm that I am above 19 years of age.</a></label>
+                                    <label for="basic_checkbox_1">I confirm that I am above 19 years of age.</label>
                                   </div>
                                 </div>
                                 <!-- /.col -->

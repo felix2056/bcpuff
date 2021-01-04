@@ -23144,3 +23144,19 @@ img.away, img.busy, img.offline, img.online {
   z-index: -1; }
 
 /*# sourceMappingURL=style.css.map */
+
+.box-success {
+  background-color: #2a8853 !important;
+}
+.box-primary {
+  background-color: #5949d6 !important;
+}
+.box-danger {
+  background-color: #fb3d4e !important;
+}
+.box-warning {
+  background-color: #ea9715 !important;
+}
+.box-info {
+  background-color: #007eff !important;
+}

@@ -1,14 +1,77 @@
 @extends('layouts.master')
 
 @section('title')
-Orders
+Invoice #BCP-2020-{{ $invoice->id }} - Orders
 @endsection
 
 @section('content')
 <div class="container-full">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="d-flex align-items-center">
+            <div class="mr-auto">
+                <div class="d-inline-block align-items-center">
+                    <li class="breadcrumb-item active">
+                        <a href="{{ route('admin.invoices') }}" class="btn btn-primary"> <i class="fa fa-book"></i>
+                            Invoices</a>
+                    </li>
+
+                    <li class="breadcrumb-item">
+                        #BCP-2020-{{ $invoice->id }}
+                    </li>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Main content -->
     <section class="content">
         <div class="row">
+            <div class="col-12">
+                <div class="box">
+                    <div class="box-header with-border">
+                      <h4 class="box-title">Billing Details</h4>
+                    </div>
+                    <div class="box-body">
+                      <table class="table table-bordered table-striped">
+                          <tbody>
+                            <tr>
+                              <th class="text-nowrap" scope="row">First Name</th>
+                              <td>{{ $invoice->first_name }}</td>
+                            </tr>
+
+                            <tr>
+                              <th class="text-nowrap" scope="row">Last Name</th>
+                              <td>{{ $invoice->last_name }}</td>
+                            </tr>
+
+                            <tr>
+                              <th class="text-nowrap" scope="row">City</th>
+                              <td colspan="5">{{ $invoice->city }}</td>
+                            </tr>
+
+                            <tr>
+                              <th class="text-nowrap" scope="row">Province</th>
+                              <td colspan="5">{{ $invoice->province }}</td>
+                            </tr>
+
+                            <tr>
+                              <th class="text-nowrap" scope="row">Address</th>
+                              <td colspan="5">{{ $invoice->address }}</td>
+                            </tr>
+
+                            <tr>
+                              <th class="text-nowrap" scope="row">Postal Code</th>
+                              <td colspan="5">{{ $invoice->postal_code }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                  </div>
+            </div>
+
+
             <div class="col-12">
                 <div class="box">
                     <div class="box-body">
@@ -61,16 +124,21 @@ Orders
                                                             width="80"></td>
                                                     <td>{{ $order->product }}</td>
                                                     <td>{{ $order->qty }}</td>
-                                                    <td>{{ Carbon\Carbon::parse($order->created_at)->format('F jS, Y') }}</td>
-                                                    <td><span class="badge badge-pill badge-success">{{ $order->status }}</span></td>
+                                                    <td>{{ Carbon\Carbon::parse($order->created_at)->format('F jS, Y') }}
+                                                    </td>
+                                                    <td><span
+                                                            class="badge badge-pill badge-success">{{ $order->status }}</span>
+                                                    </td>
                                                 </tr>
                                                 @endforeach
                                             </tbody>
 
                                             @else
                                             <tbody>
-                                                <h3 class="text-center">You have no orders!</h3>
-                                                <a href="{{ route('products.index') }}" class="btn btn-primary col-md-2 offset-5"> <i class="fa fa-shopping-cart"></i> Go to products</a>
+                                                <h3 class="text-center">No Orders For This Invoice!</h3>
+                                                <a href="{{ route('products.index') }}"
+                                                    class="btn btn-primary col-md-2 offset-5"> <i
+                                                        class="fa fa-shopping-cart"></i> Go to products</a>
                                             </tbody>
                                             @endif
                                         </table>

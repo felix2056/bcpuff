@@ -26,7 +26,7 @@
                                                 placeholder="Product Name" value="{{ old('name') }}">
 
                                             @error('name')
-                                            <span class="alert-danger" role="alert">
+                                            <span class="text text-danger" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                             @enderror
@@ -45,7 +45,7 @@
                                             </div>
 
                                             @error('price')
-                                                <span class="alert-danger" role="alert">
+                                                <span class="text text-danger" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
@@ -61,7 +61,7 @@
                                             </div>
 
                                             @error('stock')
-                                            <span class="alert-danger" role="alert">
+                                            <span class="text text-danger" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                             @enderror
@@ -77,7 +77,7 @@
                                                 placeholder="Enter product description">{{ old('description') }}</textarea>
 
                                             @error('description')
-                                            <span class="alert-danger" role="alert">
+                                            <span class="text text-danger" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                             @enderror
@@ -98,7 +98,7 @@
                                         </div>
 
                                         @error('image')
-                                        <span class="alert-danger" role="alert">
+                                        <span class="text text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                         @enderror
