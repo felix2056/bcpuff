@@ -222,7 +222,7 @@ Checkout
                                     conditions.</label>
                             </div>
 
-                            <h4>Grand Total: {{ $overallTotal }}</h4>
+                            <h4>Grand Total: ${{ $overallTotal }}</h4>
 
                             <button type="submit" id="make-payment" class="btn btn-success">PLACE ORDER</button>
 

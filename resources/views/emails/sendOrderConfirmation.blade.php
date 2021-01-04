@@ -610,19 +610,19 @@
                                                     <tbody>
                                                         <tr>
                                                             <td style="border-top: 1px solid #d5dfea;padding: 1rem;vertical-align: middle;">Total</td>
-                                                            <td style="text-align: right !important;border-top: 1px solid #d5dfea;padding: 1rem;vertical-align: middle;" class="text-right font-weight-700">$356</td>
+                                                            <td style="text-align: right !important;border-top: 1px solid #d5dfea;padding: 1rem;vertical-align: middle;" class="text-right font-weight-700">${{ $total }}</td>
                                                         </tr>
                                                         <tr>
                                                             <td style="border-top: 1px solid #d5dfea;padding: 1rem;vertical-align: middle;">Shipping</td>
-                                                            <td style="text-align: right !important;border-top: 1px solid #d5dfea;padding: 1rem;vertical-align: middle;" class="text-right font-weight-700">$10</td>
+                                                            <td style="text-align: right !important;border-top: 1px solid #d5dfea;padding: 1rem;vertical-align: middle;" class="text-right font-weight-700">${{ $shipping }}</td>
                                                         </tr>
                                                         <tr>
                                                             <td style="border-top: 1px solid #d5dfea;padding: 1rem;vertical-align: middle;">Tax</td>
-                                                            <td style="text-align: right !important;border-top: 1px solid #d5dfea;padding: 1rem;vertical-align: middle;" class="text-right font-weight-700">$42.72</td>
+                                                            <td style="text-align: right !important;border-top: 1px solid #d5dfea;padding: 1rem;vertical-align: middle;" class="text-right font-weight-700">${{ $tax }}</td>
                                                         </tr>
                                                         <tr>
                                                             <th style="border-bottom: 0px solid #d5dfea;padding: 1rem;vertical-align: middle;" class="bt-1">Payable Amount</th>
-                                                            <th style="text-align: right !important;border-bottom: 0px solid #d5dfea;padding: 1rem;vertical-align: middle;" class="bt-1 text-right font-weight-900 font-size-18">$408.72</th>
+                                                            <th style="text-align: right !important;border-bottom: 0px solid #d5dfea;padding: 1rem;vertical-align: middle;" class="bt-1 text-right font-weight-900 font-size-18">${{ $overallTotal }}</th>
                                                         </tr>
                                                     </tbody>
                                                 </table>
