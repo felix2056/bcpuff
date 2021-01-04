@@ -549,7 +549,7 @@
                                                         @foreach ($orders as $order)
                                                         <tr class="cart-3">
                                                             <td align="center" style="border: 1px solid #d5dfea;padding: 1rem;vertical-align: middle;">
-                                                                <img src="'https://bcpuff.com'{{ $order->photo }}" alt="{{ $order->product }}" width="80">
+                                                                <img src="{{ 'https://bcpuff.com' . $order->photo }}" alt="{{ $order->product }}" width="80">
                                                             </td>
                                                             <td align="center" style="border: 1px solid #d5dfea;padding: 1rem;vertical-align: middle;">{{ $order->product }}</td>
                                                             <td align="center" style="border: 1px solid #d5dfea;padding: 1rem;vertical-align: middle;">{{ $order->qty }}</td>
