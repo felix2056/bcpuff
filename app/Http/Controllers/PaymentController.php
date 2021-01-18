@@ -112,8 +112,10 @@ class PaymentController extends Controller
             //     $message->from('order-confirmation@bcpuff.com');
             //     $message->to('bcorders100@gmail.com', 'BCPuff')->subject('Someone Purchased A Product!');
             // });
-
-            $product = Product::find($cart['id'])->decrement('stock', 1);
+            
+            foreach($cart as $product) {
+                $product = Product::find($product['id'])->decrement('stock', 1);
+            }
 
             session()->forget('cart');
 
