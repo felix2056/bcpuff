@@ -235,7 +235,7 @@ class AdminController extends Controller
         $invoice->status = $status;
         $invoice->save();
 
-        //$this->sendMail($invoice, $status);
+        $this->sendMail($invoice, $status);
 
         return response('Successfully updated status of invoice BCP-2020-' . $invoice->id . ' to ' . $invoice->status . ', Member: ' . $invoice->user->name . ' will receive a follow up email!');
     }
