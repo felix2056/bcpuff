@@ -19,6 +19,7 @@ Route::get('/faqs', 'HomeController@faqs')->name('faqs');
 
 Route::get('test-cart/{id}', function ($id) {
     $cart = session()->get('cart');
+    return response($cart);
     foreach($cart as $product) {
         $product = \App\Models\Product::find($product['id'])->decrement('stock', 1);
     }
