@@ -29,6 +29,7 @@ class CartController extends Controller
         if(!$cart) {
             $cart = [
                     $id => [
+                        "id" => $product->id,
                         "name" => $product->name,
                         "quantity" => $quantity == 0 ? 1 : $quantity,
                         "price" => $product->price,
@@ -51,6 +52,7 @@ class CartController extends Controller
 
         // if item not exist in cart then add to cart with quantity = 1
         $cart[$id] = [
+            "id" => $product->id,
             "name" => $product->name,
             "quantity" => $quantity == 0 ? 1 : $quantity,
             "price" => $product->price,
