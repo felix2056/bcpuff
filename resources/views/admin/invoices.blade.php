@@ -217,7 +217,7 @@ Invoices
       data: {_token: '{{ csrf_token() }}', invoice_id: id, invoice_status: status },
       success: function (response) {
         window.alert(response);
-        window.location.reload();
+        //window.location.reload();
       }
     });
     }

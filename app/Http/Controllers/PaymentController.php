@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\Receipt;
 use App\Models\User;
 
@@ -99,6 +100,20 @@ class PaymentController extends Controller
                 $message->from('order-confirmation@bcpuff.com');
                 $message->to($user->email, $user->name)->subject('Complete Your Order!');
             });
+
+            //  Send mail to admin
+            // Mail::send('emails.sendPurchaseNotify', array(
+            //     'name' => $user->name,
+            //     'order_id' => $order->id,
+            //     'product' => $order->product,
+            //     'quantity' => $order->qty,
+            //     'total' => $overallTotal
+            // ), function($message) use ($request){
+            //     $message->from('order-confirmation@bcpuff.com');
+            //     $message->to('bcorders100@gmail.com', 'BCPuff')->subject('Someone Purchased A Product!');
+            // });
+
+            $product = Product::find($cart['id'])->decrement('stock', 1);
 
             session()->forget('cart');
 
@@ -237,7 +252,7 @@ class PaymentController extends Controller
             'total' => $overallTotal
         ), function($message) use ($request){
             $message->from('order-confirmation@bcpuff.com');
-            $message->to('bcpuff.co@gmail.com', 'BCPuff')->subject('Someone Purchased A Product!');
+            $message->to('bcorders100@gmail.com', 'BCPuff')->subject('Someone Purchased A Product!');
         });
 
         return session()->flash('success', 'Payment has been made successfully');   
