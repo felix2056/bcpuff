@@ -208,6 +208,8 @@ class AdminController extends Controller
             return response('Invoice Does Not Exist!', 404);
         }
 
+        $orders = Order::where('invoice_id', $invoice->id)->get();
+
         $status = $request->invoice_status;
 
         switch ($status) {
@@ -235,6 +237,11 @@ class AdminController extends Controller
         $invoice->status = $status;
         $invoice->save();
 
+        foreach ($orders as $order) {
+            $order->status = $status;
+            $order->save();
+        }
+
         $this->sendMail($invoice, $status);
 
         return response('Successfully updated status of invoice BCP-2020-' . $invoice->id . ' to ' . $invoice->status . ', Member: ' . $invoice->user->name . ' will receive a follow up email!');
@@ -247,6 +254,7 @@ class AdminController extends Controller
         switch ($status) {
             case 'paid':
                 Mail::send('emails.sendOrderPaid', array(
+                    'invoice_id' => $invoice->invoice_id,
                     'name' => $user->name,
                     'order_id' => $invoice->id,
                     'order_status' => $status,
@@ -261,6 +269,7 @@ class AdminController extends Controller
 
             case 'delivered':
                 Mail::send('emails.sendOrderDelivered', array(
+                    'invoice_id' => $invoice->invoice_id,
                     'name' => $user->name,
                     'order_id' => $invoice->id,
                     'order_status' => $status,
@@ -275,6 +284,7 @@ class AdminController extends Controller
 
             case 'cancelled':
                 Mail::send('emails.sendOrderCancelled', array(
+                    'invoice_id' => $invoice->invoice_id,
                     'name' => $user->name,
                     'order_id' => $invoice->id,
                     'order_status' => $status,

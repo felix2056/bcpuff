@@ -395,7 +395,7 @@
                                                                     style="padding:0;Margin:0;padding-top:40px">
                                                                     <h3
                                                                         style="Margin:0;line-height:22px;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;font-size:18px;font-style:normal;font-weight:bold;color:#ffffff">
-                                                                        Order ID: #BCP-2020-{{ $order_id }}</h3>
+                                                                        Invoice ID: {{ $invoice_id }}</h3>
                                                                 </td>
                                                             </tr>
                                                             <tr style="border-collapse:collapse">

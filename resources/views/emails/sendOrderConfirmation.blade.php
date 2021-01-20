@@ -420,10 +420,18 @@
                                                             </tr>
                                                             <tr style="border-collapse:collapse">
                                                                 <td align="left"
+                                                                    style="padding:0;Margin:0;padding-top:40px">
+                                                                    <h3
+                                                                        style="Margin:0;line-height:22px;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;font-size:18px;font-style:normal;font-weight:bold;color:#ffffff">
+                                                                        Invoice ID: {{ $invoice_id }}</h3>
+                                                                </td>
+                                                            </tr>
+                                                            <tr style="border-collapse:collapse">
+                                                                <td align="left"
                                                                     style="padding:0;Margin:0;padding-bottom:10px;padding-top:15px">
                                                                     <p
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:16px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#FFFFFF">
-                                                                        Make sure to include your ORDER# in the E-Transfer Message Box so we can know which one is yours
+                                                                        Make sure to include your INVOICE ID# in the E-Transfer Message Box so we can know which one is yours
                                                                     </p>
                                                                 </td>
                                                             </tr>
@@ -449,7 +457,7 @@
                                                                     style="padding:0;Margin:0;padding-bottom:10px;padding-top:15px">
                                                                     <p
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:16px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#FFFFFF">
-                                                                        Put your order number in the description of the crypto transfer. Our address is: <strong>3P8kD9m2Ce9iEfPVfbMgn4nDgwPHbnwfh1</strong>
+                                                                        Put your invoice ID in the description of the crypto transfer. Our address is: <strong>3P8kD9m2Ce9iEfPVfbMgn4nDgwPHbnwfh1</strong>
                                                                     </p>
                                                                 </td>
                                                             </tr>

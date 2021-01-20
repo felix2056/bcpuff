@@ -89,6 +89,7 @@ class PaymentController extends Controller
 
             //  Send mail to admin
             Mail::send('emails.sendOrderConfirmation', array(
+                'invoice_id' => $invoice->invoice_id,
                 'name' => $user->name,
                 'orders' => $all_orders,
                 'total' => $total,

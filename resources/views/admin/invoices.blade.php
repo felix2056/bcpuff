@@ -66,7 +66,7 @@ Invoices
                   <tbody>
                     @foreach ($invoices as $invoice)
                     <tr role="row" class="odd">
-                      <td class="sorting_1">#BCP-2020-{{ $invoice->id }}</td>
+                      <td class="sorting_1">#{{ $invoice->invoice_id }}</td>
                       <td>
                         <h6 class="mb-0">
                           <a href="#">{{ $invoice->user->name }}</a>
@@ -74,7 +74,7 @@ Invoices
                         </h6>
                       </td>
                       <td>
-                        <select name="status" id="status" class="form-control" data-placeholder="Select status">
+                        <select name="status" id="{{ 'status-' . $invoice->id }}" class="form-control" data-placeholder="Select status">
                           <option @if($invoice->status == 'pending') selected @endif value="pending">Pending</option>
                           <option @if($invoice->status == 'paid') selected @endif value="paid">Paid</option>
                           <option @if($invoice->status == 'delivered') selected @endif value="delivered">Delivered
@@ -204,7 +204,7 @@ Invoices
     var proceed = confirm("Are you sure you want to proceed?");
     
     if (proceed) {
-      var status = $("#status").val();
+      var status = $("#status-" + id).val();
 
     if (!status && status == null) {
       alert('Invalid');

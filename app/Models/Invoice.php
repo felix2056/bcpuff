@@ -9,6 +9,8 @@ class Invoice extends Model
 {
     use HasFactory;
 
+    protected $appends = ['invoice_id'];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -17,5 +19,9 @@ class Invoice extends Model
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function getInvoiceIdAttribute() {
+    	return "BCPUFF-" . date('Y') . '-' . $this->id;
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-Invoice #BCP-2020-{{ $invoice->id }} - Orders
+Invoice {{ $invoice->invoice_id }} - Orders
 @endsection
 
 @section('content')
@@ -17,7 +17,7 @@ Invoice #BCP-2020-{{ $invoice->id }} - Orders
                     </li>
 
                     <li class="breadcrumb-item">
-                        #BCP-2020-{{ $invoice->id }}
+                        {{ $invoice->invoice_id }}
                     </li>
                 </div>
             </div>
@@ -91,7 +91,7 @@ Invoice #BCP-2020-{{ $invoice->id }} - Orders
                                                         Customer</th>
                                                     <th class="sorting" tabindex="0" aria-controls="productorder"
                                                         rowspan="1" colspan="1"
-                                                        aria-label="Order ID: activate to sort column ascending">Order
+                                                        aria-label="Invoice ID: activate to sort column ascending">Invoice
                                                         ID</th>
                                                     <th class="sorting" tabindex="0" aria-controls="productorder"
                                                         rowspan="1" colspan="1"
@@ -117,9 +117,34 @@ Invoice #BCP-2020-{{ $invoice->id }} - Orders
                                             @if (count($orders) > 0)
                                             <tbody>
                                                 @foreach ($orders as $order)
+                                                @php
+                                                $badge_color = 'primary';
+
+                                                switch ($order->status) {
+                                                    case 'pending':
+                                                    $badge_color = 'warning';
+                                                    break;
+
+                                                    case 'paid':
+                                                    $badge_color = 'info';
+                                                    break;
+
+                                                    case 'delivered':
+                                                    $badge_color = 'success';
+                                                    break;
+
+                                                    case 'cancelled':
+                                                    $badge_color = 'danger';
+                                                    break;
+
+                                                    default:
+                                                    $badge_color = 'primary';
+                                                    break;
+                                                }
+                                                @endphp
                                                 <tr role="row" class="odd">
                                                     <td class="sorting_1">{{ $order->user->name }}</td>
-                                                    <td>#SKU-224422-{{ $order->id }}</td>
+                                                    <td>#{{ $order->invoice->invoice_id }}</td>
                                                     <td><img src="{{ $order->photo }}" alt="{{ $order->name }}"
                                                             width="80"></td>
                                                     <td>{{ $order->product }}</td>
@@ -127,7 +152,7 @@ Invoice #BCP-2020-{{ $invoice->id }} - Orders
                                                     <td>{{ Carbon\Carbon::parse($order->created_at)->format('F jS, Y') }}
                                                     </td>
                                                     <td><span
-                                                            class="badge badge-pill badge-success">{{ $order->status }}</span>
+                                                            class="badge badge-pill badge-{{ $badge_color }}">{{ $order->status }}</span>
                                                     </td>
                                                 </tr>
                                                 @endforeach
