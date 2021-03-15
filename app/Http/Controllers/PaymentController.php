@@ -94,7 +94,8 @@ class PaymentController extends Controller
                     return redirect()->back()->with(['error' => 'Coupon code doesn\'t exist!'])->withInput();
                 }
 
-                if ($coupon->uses >= $coupon->limit) {
+                if ($coupon->status == 0) {
+                    // Coupon is expired
                     session()->flash('error', 'Coupon code invalid or expired!');
                     return redirect()->back()->with(['error' => 'Coupon code invalid or expired!'])->withInput();
                 }
@@ -103,6 +104,12 @@ class PaymentController extends Controller
                 $overallTotal = $calculateTotal * ((100 - $coupon->discount) / 100);
 
                 $coupon->increment('uses');
+                
+                if ($coupon->uses >= $coupon->limit) {
+                    $coupon->uses = $coupon->limit;
+                    $coupon->status = 0;
+                }
+
                 $coupon->save();
             }
 
