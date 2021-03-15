@@ -14,7 +14,6 @@ class MailController extends Controller
 
     public function sendMail(Request $request)
     {
-        // return response($request->all());
         //$email = 'bcpuff.co@gmail.com';
 
         $request->validate([

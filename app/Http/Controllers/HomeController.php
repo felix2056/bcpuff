@@ -27,12 +27,4 @@ class HomeController extends Controller
 
         return view('products.orders', compact('orders'));
     }
-
-    public function sendMail(Request $request)
-    {
-        $user = User::find(Auth::user()->id);
-        $orders = $user->orders()->with('user')->get();
-
-        return view('products.orders', compact('orders'));
-    }
 }

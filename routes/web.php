@@ -63,6 +63,10 @@ Route::group(['middleware' => ['auth', 'is_admin']], function () {
         Route::any('/products/{slug}/edit', 'AdminController@productEdit')->name('admin.products.edit');
         Route::post('/products/{id}/delete', 'AdminController@productDestroy')->name('admin.products.destroy');
 
+        Route::get('/coupons', 'CouponsController@index')->name('coupons.index');
+        Route::post('/create-coupon', 'CouponsController@store')->name('coupons.store');
+        Route::post('/delete-coupon', 'CouponsController@destroy')->name('coupons.destroy');
+
         Route::get('/invoices/{id}/orders', 'AdminController@invoiceOrders')->name('admin.invoiceOrders');
         Route::get('/invoices', 'AdminController@invoices')->name('admin.invoices');
         Route::post('/update-invoice', 'AdminController@updateInvoice')->name('admin.update_invoice');

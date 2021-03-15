@@ -35,6 +35,10 @@
             border-radius: unset;
         }
 
+        .dropdown-menu .user-body {
+            width: 100%;
+        }
+
         .br-none {
             border-right: none !important;
         }
@@ -107,6 +111,7 @@
                             @if(Auth::user()->isAdmin())
                             <a class="dropdown-item" href="{{ route('admin.index') }}">ADMIN</a>
                             <a class="dropdown-item" href="{{ route('admin.invoices') }}">INVOICES</a>
+                            <a class="dropdown-item" href="{{ route('coupons.index') }}">COUPONS</a>
                             <a class="dropdown-item" href="{{ route('admin.products.create') }}">ADD PRODUCT</a>
 
                             <div class="dropdown-divider"></div>

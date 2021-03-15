@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Receipt;
+use App\Models\Coupon;
 use App\Models\User;
 
 class PaymentController extends Controller
@@ -82,6 +83,28 @@ class PaymentController extends Controller
             $tax = Helper::calculateTax($percent, $total);
 
             $overallTotal = $total + $shipping + $tax;
+
+            // Check for valid coupon code
+            if ($request->has('code') && $request->get('code') != null) {
+                $code = $request->get('code');
+                $coupon = Coupon::where('code', $code)->first();
+
+                if (!$coupon) {
+                    session()->flash('error', 'Coupon code doesn\'t exist!');
+                    return redirect()->back()->with(['error' => 'Coupon code doesn\'t exist!'])->withInput();
+                }
+
+                if ($coupon->uses >= $coupon->limit) {
+                    session()->flash('error', 'Coupon code invalid or expired!');
+                    return redirect()->back()->with(['error' => 'Coupon code invalid or expired!'])->withInput();
+                }
+                
+                $calculateTotal = $total + $shipping + $tax;
+                $overallTotal = $calculateTotal * ((100 - $coupon->discount) / 100);
+
+                $coupon->increment('uses');
+                $coupon->save();
+            }
 
             $update_invoice = Invoice::find($invoice->id);
             $update_invoice->total = $overallTotal;

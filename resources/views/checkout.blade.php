@@ -45,8 +45,6 @@ Checkout
                         </div>
                         @endif
 
-                        <form action="{{ route('send-mail') }}" method="post" class="form">
-                            @csrf
                             <div class="box-body">
                                 <hr class="my-15">
                                 <div class="row">
@@ -123,9 +121,24 @@ Checkout
                                         <span class="text-danger">{{ $errors->first('postal_code') }}</span>
                                         @endif
                                     </div>
+
+                                    <div class="col-md-12">
+                                        <p class="text text-success mt-25">
+                                            Get some percentage(s) off with a valid coupon code.
+                                        </p>
+
+                                        <div class="form-group">
+                                            <label>Coupon Code</label>
+                                            <input type="text" name="code" class="form-control"
+                                                placeholder="Apply Coupon Code (optional)" value="{{ old('coupon') }}">
+                                        </div>
+
+                                        @if ($errors->has('coupon'))
+                                        <span class="text-danger">{{ $errors->first('coupon') }}</span>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
-                        </form>
                     </div>
                     <!-- /.box -->
                 </div>
