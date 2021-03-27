@@ -51,7 +51,16 @@
             display: inline;
         }
 
-        .ck-editor .ck-content p, h1,h2,h3,h4,h5,h6, span, i, strong {
+        .ck-editor .ck-content p, 
+        .ck-editor .ck-content h1,
+        .ck-editor .ck-content h2,
+        .ck-editor .ck-content h3,
+        .ck-editor .ck-content h4,
+        .ck-editor .ck-content h5,
+        .ck-editor .ck-content h6, 
+        .ck-editor .ck-content span, 
+        .ck-editor .ck-content i, 
+        .ck-editor .ck-content strong {
             color: #0a0a0a;
             text-transform: initial;
         }
