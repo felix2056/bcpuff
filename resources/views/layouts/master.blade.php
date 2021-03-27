@@ -51,7 +51,7 @@
             display: inline;
         }
 
-        .ck-editor .ck-content p {
+        .ck-editor .ck-content p, h1,h2,h3,h4,h5,h6, span, i, strong {
             color: #0a0a0a;
             text-transform: initial;
         }
