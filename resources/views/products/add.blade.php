@@ -73,7 +73,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="font-weight-700 font-size-16">Product Description</label>
-                                            <textarea name="description" class="form-control p-20" rows="4"
+                                            <textarea name="description" class="form-control p-20" id="ckeditor" rows="4"
                                                 placeholder="Enter product description">{{ old('description') }}</textarea>
 
                                             @error('description')
@@ -122,7 +122,18 @@
 @endsection
 
 @section('scripts')
+<script src="https://cdn.ckeditor.com/ckeditor5/27.0.0/classic/ckeditor.js"></script>
+
 <script>
+    ClassicEditor
+    .create(document.querySelector('#ckeditor'))
+    .then(editor => {
+        console.log( editor );
+    })
+    .catch(error => {
+        console.error( error );
+    });
+
     function insertImage() {
         var file  = document.getElementById('blog_image').click();
     }

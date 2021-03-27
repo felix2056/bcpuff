@@ -50,6 +50,15 @@
         .main-footer a {
             display: inline;
         }
+
+        .ck-editor .ck-content p {
+            color: #0a0a0a;
+            text-transform: initial;
+        }
+
+        .ck-editor .ck-editor__editable_inline {
+            min-height: 250px;
+        }
     </style>
 
     @yield('styles')

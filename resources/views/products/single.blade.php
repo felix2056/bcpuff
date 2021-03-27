@@ -43,7 +43,7 @@
                                     <span class="text-danger">{{ $product->stock }} <strong class="badge badge-danger">in stock</strong></span>
                                 </h1>
                                 <hr>
-                                <p>{{ $product->description }}</p>
+                                <p>{!! $product->description !!}</p>
                             
                                 <hr>
 
