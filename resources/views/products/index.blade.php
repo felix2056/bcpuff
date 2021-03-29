@@ -32,6 +32,8 @@ Products
                 <div class="btn-group">
                     <button class="btn btn-rounded btn-dark dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">Categories</button>
                     <div class="dropdown-menu dropdown-menu-right" style="will-change: transform;">
+                        <a class="dropdown-item" href="{{ route('products.index') }}">All</a>
+
                         @foreach ($categories as $category)
                             <a class="dropdown-item" href="{{ route('products.index', ['category' => $category->name, 'id' => $category->id]) }}">{{ $category->name }}</a>
                         @endforeach
