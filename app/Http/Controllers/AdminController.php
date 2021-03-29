@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
+use App\Models\Setting;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\User;
@@ -24,6 +26,9 @@ class AdminController extends Controller
         $data['total_users'] = User::count();
         $data['total_admins'] = User::where('type', User::ADMIN_TYPE)->count();
         $data['total_orders'] = Order::count();
+
+        $data['settings'] = Setting::first();
+        $data['categories'] = Category::withCount('products')->get();
 
         return view('admin.index', compact('data'));
     }
@@ -50,6 +55,7 @@ class AdminController extends Controller
         if ($request->isMethod('post')) {
             $rules = [
                 'name' => 'required|min:5|max:1000',
+                'category_id' => 'numeric',
                 'description' => 'required|min:5',
                 'price' => 'required|numeric',
                 'stock' => 'required|numeric',
@@ -69,9 +75,14 @@ class AdminController extends Controller
                 'price' => $request->price,
                 'stock' => $request->stock,
                 'description' => $request->description,
+                'category_id' => 0,
                 'slug' => Str::slug($request->name, '-')
             ];
-            
+
+            if ($request->get('category_id') && $request->get('category_id') != 0) {
+                $data['category_id'] = $request->get('category_id');
+            }
+
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
@@ -94,15 +105,16 @@ class AdminController extends Controller
 
     public function productEdit(Request $request, $slug)
     {
-        $product = Product::where('slug', $slug)->first();
+        $product = Product::with('category')->where('slug', $slug)->first();
 
         if (!$product) {
             return abort(404);
         }
-        
+
         if ($request->isMethod('post')) {
             $rules = [
                 'name' => 'required|min:5|max:1000',
+                'category_id' => 'numeric',
                 'description' => 'required|min:5',
                 'price' => 'required|numeric',
                 'stock' => 'required|numeric',
@@ -121,16 +133,21 @@ class AdminController extends Controller
             $product->price = $request->price;
             $product->stock = $request->stock;
             $product->description = $request->description;
+            $product->category_id = 0;
             $product->slug = Str::slug($request->name, '-');
-            
+
+            if ($request->get('category_id') && $request->get('category_id') != 0) {
+                $product->category_id = $request->get('category_id');
+            }
+
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
 
-                $exists = Storage::exists('products/'. $product->image);
+                $exists = Storage::exists('products/' . $product->image);
 
                 if ($exists) {
-                    Storage::delete('products/'. $product->image);
+                    Storage::delete('products/' . $product->image);
                 }
 
                 $imagename = 'product' . '_' . time() . '_' . $image->getClientOriginalName();
@@ -158,9 +175,9 @@ class AdminController extends Controller
 
         if (!empty($product->image)) {
             $image_exists = Storage::exists('public/products/' . $product->image);
-    
+
             if ($image_exists) {
-              Storage::delete('public/products/' . $product->image);
+                Storage::delete('public/products/' . $product->image);
             }
         }
 
@@ -228,7 +245,7 @@ class AdminController extends Controller
             case 'cancelled':
                 $status = 'cancelled';
                 break;
-            
+
             default:
                 $status = 'pending';
                 break;
@@ -260,7 +277,7 @@ class AdminController extends Controller
                     'order_status' => $status,
                     'order_due_date' => $invoice->due_date,
                     'order_total' => $invoice->total
-                ), function($message) use ($user){
+                ), function ($message) use ($user) {
                     $message->from('order-confirmation@bcpuff.com');
                     $message->to($user->email, $user->name)->subject('Your Order Is Processing!');
                 });
@@ -275,11 +292,11 @@ class AdminController extends Controller
                     'order_status' => $status,
                     'order_due_date' => $invoice->due_date,
                     'order_total' => $invoice->total
-                ), function($message) use ($user){
+                ), function ($message) use ($user) {
                     $message->from('order-confirmation@bcpuff.com');
                     $message->to($user->email, $user->name)->subject('Your Order Has Been Delivered! Thank You');
                 });
-    
+
                 break;
 
             case 'cancelled':
@@ -290,12 +307,58 @@ class AdminController extends Controller
                     'order_status' => $status,
                     'order_due_date' => $invoice->due_date,
                     'order_total' => $invoice->total
-                ), function($message) use ($user){
+                ), function ($message) use ($user) {
                     $message->from('order-confirmation@bcpuff.com');
                     $message->to($user->email, $user->name)->subject('Your Order Was Cancelled!');
                 });
-    
+
                 break;
         }
+    }
+
+    public function updateSettings(Request $request)
+    {
+        $rules = [
+            'title' => 'required|min:5|max:1000',
+            'sub_title' => 'required|min:5|max:1000',
+            'info' => 'required|min:5',
+            'logo' => 'max:2048'
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', 'Be sure to fill up all required fields!')->withErrors($validator)->withInput();
+        }
+
+        $user = User::find(Auth::user()->id);
+
+        $settings = Setting::first();
+
+        $settings->title = $request->title;
+        $settings->sub_title = $request->sub_title;
+        $settings->info = $request->info;
+
+
+        if ($request->hasFile('logo')) {
+            $logo = $request->file('logo');
+
+            $exists = Storage::exists('settings/' . $settings->logo);
+
+            if ($exists) {
+                Storage::delete('settings/' . $settings->logo);
+            }
+
+            $logoname = 'settings' . '_' . time() . '_' . $logo->getClientOriginalName();
+            $path = $logo->storeAs('public/settings/', $logoname);
+
+            if ($path) {
+                $settings->logo = $logoname;
+            }
+        }
+
+        $settings->save();
+
+        return redirect()->back()->with('success', 'Successfully Updated Website Settings!');
     }
 }

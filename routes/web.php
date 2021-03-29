@@ -63,15 +63,24 @@ Route::group(['middleware' => ['auth', 'is_admin']], function () {
         Route::any('/products/{slug}/edit', 'AdminController@productEdit')->name('admin.products.edit');
         Route::post('/products/{id}/delete', 'AdminController@productDestroy')->name('admin.products.destroy');
 
+        // Coupons
         Route::get('/coupons', 'CouponsController@index')->name('coupons.index');
         Route::post('/create-coupon', 'CouponsController@store')->name('coupons.store');
         Route::post('/delete-coupon', 'CouponsController@destroy')->name('coupons.destroy');
 
+        // Invoices
         Route::get('/invoices/{id}/orders', 'AdminController@invoiceOrders')->name('admin.invoiceOrders');
         Route::get('/invoices', 'AdminController@invoices')->name('admin.invoices');
         Route::post('/update-invoice', 'AdminController@updateInvoice')->name('admin.update_invoice');
 
-        //Users
+        // Settings
+        Route::post('/update-settings', 'AdminController@updateSettings')->name('update-settings');
+
+        // Categories
+        Route::any('/category/add', 'CategoriesController@create')->name('admin.categories.create');
+        Route::post('/category/{id}/delete', 'CategoriesController@destroy')->name('admin.categories.destroy');
+
+        // Users
         Route::get('/users', 'AdminController@users')->name('admin.users.index');
     });
 });

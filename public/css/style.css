@@ -114,15 +114,15 @@ ul{
 .col-4 img{
    width:70%; 
 }
-.title{
+/* .title{
     text-align:center;
     margin:0 auto 80px;
     position: relative;
     line-height: 150px;
     color:white;
     font-family:Fugaz One;
-}
-.title::after{
+} */
+/* .title::after{
     content: "";
     background:white;
     width: 100px;
@@ -132,7 +132,7 @@ ul{
     bottom:0;
     left:50%;
     transform: translateX(-50%);
-}
+} */
 .col-4:hover{
     transform:translateY(-3px) ;
 }

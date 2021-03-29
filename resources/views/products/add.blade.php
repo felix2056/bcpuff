@@ -36,6 +36,27 @@
                                 <!--/row-->
 
                                 <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="font-weight-700 font-size-16">Product Category</label>
+                                            <select name="category_id"  class="form-control">
+                                                <option>Select category</option>
+
+                                                @foreach (App\Models\Category::all() as $category)
+                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                @endforeach
+                                            </select>
+
+                                            @error('category_id')
+                                            <span class="text text-danger" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="font-weight-700 font-size-16">Price</label>

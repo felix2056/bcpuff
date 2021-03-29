@@ -736,7 +736,7 @@
                     <i class="ti-menu"></i>
                 </a>
                 <!-- Logo -->
-                <a href="index.html" class="logo">
+                <a href="/" class="logo">
                     <!-- logo-->
                     <div class="logo-lg">
                         {{-- <span class="light-logo"><img src="/img/compas.png" alt="logo"></span>

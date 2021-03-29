@@ -39,6 +39,18 @@
             width: 100%;
         }
 
+        .text-transform-none {
+            text-transform: none;
+        }
+
+        .text-transform-uppercase {
+            text-transform: uppercase;
+        }
+
+        .text-transform-capitalize {
+            text-transform: capitalize;
+        }
+
         .br-none {
             border-right: none !important;
         }
@@ -73,11 +85,13 @@
     @yield('styles')
 
     <!--Braintree -->
-    <script src="https://js.braintreegateway.com/web/dropin/1.24.0/js/dropin.min.js"></script>
+    {{-- <script src="https://js.braintreegateway.com/web/dropin/1.24.0/js/dropin.min.js"></script> --}}
 
     <!-- Paypal -->
-    <script src="{{ 'https://www.paypal.com/sdk/js?client-id=' . env('PAYPAL_CLIENT_ID', 'AdapBgkwSNZva5eSoQpvnW26erJJVamvt9_3J0iIXd3yBz8QSDZAC61Dodq8NQs2cBQd0vrFQlNIcdY5') }}"></script>
+    {{-- <script src="{{ 'https://www.paypal.com/sdk/js?client-id=' . env('PAYPAL_CLIENT_ID', 'AdapBgkwSNZva5eSoQpvnW26erJJVamvt9_3J0iIXd3yBz8QSDZAC61Dodq8NQs2cBQd0vrFQlNIcdY5') }}"></script> --}}
 
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="/vendor_components/animate/animate.css">
 </head>
 
 <body>
@@ -86,7 +100,8 @@
             <div class="logo">
                 <b><i>
                         <h1>BC PUFF</h1>
-                    </i></b>
+                    </i>
+                </b>
             </div>
         </a>
 
@@ -101,7 +116,7 @@
                     <a class="nav-link" href="{{ route('index') }}">HOME <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('products.index') }}">PRODUCTS</a>
+                    <a class="nav-link" href="{{ route('products.index') }}">MENU</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('contact') }}">CONTACT</a>
@@ -203,19 +218,19 @@
     <div class="wrapper">
         <div class="content-wrapper">
             @yield('content')
-
-            <footer class="main-footer">
-                <div class="pull-right d-none d-sm-inline-block">
-                    <ul
-                        class="nav nav-primary nav-dotted nav-dot-separated justify-content-center justify-content-md-end">
-                        <li class="nav-item">
-                            <a class="nav-link" href="javascript:void(0)">FAQ</a>
-                        </li>
-                    </ul>
-                </div>
-                © {{ date('Y') }} <a href="https://www.bcpuff.com/">BCPUFF STORE</a>. All Rights Reserved.
-            </footer>
         </div>
+
+        <footer class="main-footer">
+            <div class="pull-right d-none d-sm-inline-block">
+                <ul
+                    class="nav nav-primary nav-dotted nav-dot-separated justify-content-center justify-content-md-end">
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0)">FAQ</a>
+                    </li>
+                </ul>
+            </div>
+            © {{ date('Y') }} <a href="https://www.bcpuff.com/">BCPUFF STORE</a>. All Rights Reserved.
+        </footer>
     </div>
 
     <!-- Vendor JS -->
@@ -255,6 +270,10 @@
     </script> --}}
 
     @yield('scripts')
+
+    <!-- javascript -->
+    <script src="../assets/vendors/jquery.min.js"></script>
+    <script src="../assets/owlcarousel/owl.carousel.js"></script>
 
 </body>
 

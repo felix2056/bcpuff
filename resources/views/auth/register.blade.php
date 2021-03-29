@@ -48,12 +48,22 @@ Register
                                     <input type="text" name="name" value="{{ old('name') }}" class="form-control pl-15 bg-transparent" placeholder="Full Name">
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-transparent"><i class="ti-email"></i></span>
                                     </div>
                                     <input type="email" name="email" value="{{ old('email') }}" class="form-control pl-15 bg-transparent" placeholder="Email">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-transparent"><i class="ti-mobile"></i></span>
+                                    </div>
+                                    <input type="text" name="phone" value="{{ old('phone') }}" class="form-control pl-15 bg-transparent" placeholder="Phone">
                                 </div>
                             </div>
 
