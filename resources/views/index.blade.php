@@ -90,7 +90,7 @@
                 </div>
             </div>
 
-            <div class="right-sidebar bodered col-md-4">
+            <div class="right-sidebar col-md-4">
                 <img src="{{ App\Models\Setting::first()->logo_url }}" alt="{{ App\Models\Setting::first()->title }}">
             </div>
         </div>
