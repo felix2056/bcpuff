@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Carousel;
 use App\Models\Category;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
@@ -33,6 +35,80 @@ class AdminController extends Controller
         return view('admin.index', compact('data'));
     }
 
+    public function carousel()
+    {
+        return view('admin.carousel');
+    }
+
+    public function getCarousel()
+    {
+        $images = Carousel::all();
+
+        foreach ($images as $image) {
+            $image['type'] = 'yUploaded';
+            $image['url'] = '/storage/settings/carousel/' . $image->url;
+        }
+
+        return response()->json([
+            'images' => $images
+        ], 200);
+    }
+
+    public function uploadCarousel(Request $request)
+    {
+        if ($request->hasfile('images')) {
+
+            $allowed = ['jpg', 'jpeg', 'png', 'jfif', 'gif'];
+
+            $files = $request->file('images');
+
+            foreach ($files as $key => $file) {
+                $filename = 'carousel_' . $key . '_' . time() . '_' . $file->getClientOriginalName();
+                $extention = $file->getClientOriginalExtension();
+
+                $check = in_array($extention, $allowed);
+
+                if ($check) {
+                    $path = $file->storeAs('public/settings/carousel/', $filename);
+
+                    if ($path) {
+                        $carousel = new Carousel();
+                        $carousel->position = $key;
+                        $carousel->url = $filename;
+                        $carousel->save();
+                    }
+                }
+            }
+        }
+
+        return response()->json([
+            'message' => 'successfully uploaded images'
+        ]);
+    }
+
+    public function destroyCarousel(Request $request, $id)
+    {
+        $image = Carousel::find($request->image_id);
+        
+        if (!$image) {
+            return response()->json([
+                'error' => 'This image does not exists!'
+            ], 401);
+        }
+
+        $image_exists = Storage::exists('public/settings/carousel/' . $image->url);
+
+        if ($image_exists) {
+          Storage::delete('public/settings/carousel/' . $image->url);
+        }
+      
+        $image->delete();
+      
+        return response()->json([
+            'success' => 'Successfully deleted image'
+        ], 200);
+    }
+
     public function products()
     {
         $products = Product::get();
@@ -56,6 +132,7 @@ class AdminController extends Controller
             $rules = [
                 'name' => 'required|min:5|max:1000',
                 'category_id' => 'numeric',
+                'summary' => 'required|min:5',
                 'description' => 'required|min:5',
                 'price' => 'required|numeric',
                 'stock' => 'required|numeric',
@@ -74,6 +151,7 @@ class AdminController extends Controller
                 'name' => $request->name,
                 'price' => $request->price,
                 'stock' => $request->stock,
+                'summary' => $request->summary,
                 'description' => $request->description,
                 'category_id' => 0,
                 'slug' => Str::slug($request->name, '-')
@@ -115,6 +193,7 @@ class AdminController extends Controller
             $rules = [
                 'name' => 'required|min:5|max:1000',
                 'category_id' => 'numeric',
+                'summary' => 'required|min:5',
                 'description' => 'required|min:5',
                 'price' => 'required|numeric',
                 'stock' => 'required|numeric',
@@ -132,6 +211,7 @@ class AdminController extends Controller
             $product->name = $request->name;
             $product->price = $request->price;
             $product->stock = $request->stock;
+            $product->summary = $request->summary;
             $product->description = $request->description;
             $product->category_id = 0;
             $product->slug = Str::slug($request->name, '-');

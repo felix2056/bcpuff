@@ -95,6 +95,19 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
+                                            <label class="font-weight-700 font-size-16">Product Summary</label>
+                                            <input type="text" name="summary" class="form-control" value="{{ $product->summary }}" placeholder="Enter product summary">
+                                        
+                                            @error('summary')
+                                            <span class="alert-danger" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
                                             <label class="font-weight-700 font-size-16">Product Description</label>
                                             <textarea name="description" id="ckeditor" class="form-control p-20" rows="4"
                                                 placeholder="Enter product description">{{ $product->description }}</textarea>

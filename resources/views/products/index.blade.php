@@ -10,6 +10,14 @@ Products
         background: none;
         border: 2px solid #fff;
     }
+
+    .cat-btn {
+        background: transparent;
+    }
+
+    .cat-btn:hover {
+        background: transparent !important;
+    }
 </style>
 @endsection
 
@@ -30,7 +38,7 @@ Products
                 @endauth
 
                 <div class="btn-group">
-                    <button class="btn btn-rounded btn-dark dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">Categories</button>
+                    <button class="cat-btn btn btn-rounded btn-dark dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">CATEGORIES</button>
                     <div class="dropdown-menu dropdown-menu-right" style="will-change: transform;">
                         <a class="dropdown-item" href="{{ route('products.index') }}">All</a>
 
@@ -102,7 +110,7 @@ Products
                                 <a href="{{ route('products.single', ['slug' => $product->slug]) }}">
                                 <h4 class="box-title mb-0">{{ $product->name }}</h4>
                                 </a>
-                                <small class="text-muted db">{{ $product->short_description }}</small>
+                                <small class="text-muted db">{{ $product->summary }}</small>
                             </div>
                         </div>
                     </div>
@@ -113,7 +121,7 @@ Products
         </div>
         @endif
     </section>
-    <!-- /.content -->
+    <!-- / Main content -->
 </div>
 
 {{-- <div class="small-container">

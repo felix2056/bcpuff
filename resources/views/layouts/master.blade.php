@@ -143,6 +143,7 @@
                             <a class="dropdown-item" href="{{ route('orders') }}">ORDERS</a>
                             @if(Auth::user()->isAdmin())
                             <a class="dropdown-item" href="{{ route('admin.index') }}">ADMIN</a>
+                            <a class="dropdown-item" href="{{ route('admin.carousel.index') }}">CAROUSEL</a>
                             <a class="dropdown-item" href="{{ route('admin.invoices') }}">INVOICES</a>
                             <a class="dropdown-item" href="{{ route('coupons.index') }}">COUPONS</a>
                             <a class="dropdown-item" href="{{ route('admin.products.create') }}">ADD PRODUCT</a>
@@ -272,8 +273,11 @@
     @yield('scripts')
 
     <!-- javascript -->
-    <script src="../assets/vendors/jquery.min.js"></script>
-    <script src="../assets/owlcarousel/owl.carousel.js"></script>
+    <script src="/assets/vendors/jquery.min.js"></script>
+    <script src="/assets/owlcarousel/owl.carousel.js"></script>
+
+    {{-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
 
 </body>
 

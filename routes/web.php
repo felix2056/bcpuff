@@ -59,6 +59,16 @@ Route::group(['middleware' => ['auth']], function () {
 Route::group(['middleware' => ['auth', 'is_admin']], function () {
     Route::group(['prefix' => 'administration'], function () {
         Route::get('/', 'AdminController@index')->name('admin.index');
+
+        // Carousel images
+        Route::any('/carousel', 'AdminController@carousel')->name('admin.carousel.index');
+        Route::group(['prefix' => 'api'], function () {
+            Route::get('/get-images', 'AdminController@getCarousel')->name('admin.carousel.get');
+            Route::post('/upload-images', 'AdminController@uploadCarousel')->name('admin.carousel.upload');
+            Route::post('/delete-image/{id}', 'AdminController@destroyCarousel')->name('admin.carousel.destroy');
+        });
+
+        // Products
         Route::any('/product/add', 'AdminController@productCreate')->name('admin.products.create');
         Route::any('/products/{slug}/edit', 'AdminController@productEdit')->name('admin.products.edit');
         Route::post('/products/{id}/delete', 'AdminController@productDestroy')->name('admin.products.destroy');
