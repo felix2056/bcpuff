@@ -10,14 +10,6 @@ Products
         background: none;
         border: 2px solid #fff;
     }
-
-    .cat-btn {
-        background: transparent;
-    }
-
-    .cat-btn:hover {
-        background: transparent !important;
-    }
 </style>
 @endsection
 
@@ -37,16 +29,28 @@ Products
                 @endif
                 @endauth
 
-                <div class="btn-group">
-                    <button class="cat-btn btn btn-rounded btn-dark dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">CATEGORIES</button>
-                    <div class="dropdown-menu dropdown-menu-right" style="will-change: transform;">
-                        <a class="dropdown-item" href="{{ route('products.index') }}">All</a>
+                <div class="ml-5 d-inline-block align-items-center">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown user user-menu">
+                            <a href="#" class="nav-link waves-effect waves-light dropdown-toggle" data-toggle="dropdown" title="User" aria-expanded="false">
+                                CATEGORIES
+                            </a>
+                            <ul class="dropdown-menu animated flipInX">
+                                <li class="user-body">
+                                    <a class="dropdown-item" href="{{ route('products.index') }}">All</a>
+                                </li>
+                                
+                                <div class="dropdown-divider"></div>
 
-                        @foreach ($categories as $category)
-                            <a class="dropdown-item" href="{{ route('products.index', ['category' => $category->name, 'id' => $category->id]) }}">{{ $category->name }}</a>
-                        @endforeach
-                    </div>
-                  </div>
+                                @foreach ($categories as $category)
+                                <li class="user-body">
+                                    <a class="dropdown-item" href="{{ route('products.index', ['category' => $category->name, 'id' => $category->id]) }}">{{ $category->name }}</a>
+                                </li>
+                                @endforeach
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
